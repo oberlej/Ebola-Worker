@@ -1,0 +1,136 @@
+<resources>
+    <integer name="weightLow">30</integer>
+    <integer name="weightMed">50</integer>
+    <integer name="weightHigh">20</integer>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!-- android:textColorPrimary is the color of the title text in the Toolbar  -->
+        <item name="android:textColorPrimary">@color/actionBarText</item>
+        <!-- actionMenuTextColor is the color of the text of action (menu) items  -->
+        <item name="actionMenuTextColor">@color/actionBarText</item>
+        <!--&lt;!&ndash; Tints the input fields like checkboxes and text fields &ndash;&gt;-->
+        <!--<item name="colorAccent">@color/cursorAccent</item>-->
+        <!--&lt;!&ndash; Applies to views in their normal state. &ndash;&gt;-->
+        <!--<item name="colorControlNormal">@color/controlNormal</item>-->
+        <!--&lt;!&ndash; Applies to views in their activated state (i.e checked or switches) &ndash;&gt;-->
+        <!--<item name="colorControlActivated">@color/controlActivated</item>-->
+        <!--&lt;!&ndash; Applied to framework control highlights (i.e ripples or list selectors) &ndash;&gt;-->
+        <!--<item name="colorControlHighlight">@color/controlActivated</item>-->
+
+        <!-- Enable these below if you want clicking icons to trigger a ripple effect -->
+        <!--
+        <item name="selectableItemBackground">?android:selectableItemBackground</item>
+        <item name="selectableItemBackgroundBorderless">?android:selectableItemBackground</item>
+        -->
+    </style>
+
+    <!-- This configures the styles for the title within the Toolbar  -->
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <!--<item name="android:textSize">21sp</item>-->
+        <!--<item name="android:textStyle">italic</item>-->
+    </style>
+
+    <style name="ToolbarTitle">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">left</item>
+        <item name="android:textColor">@color/actionBarText</item>
+        <item name="android:textSize">25sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="FormField">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_marginTop">7dp</item>
+    </style>
+
+    <style name="SymptomRow">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingRight">@dimen/screen_border_distance</item>
+        <item name="android:paddingLeft">@dimen/screen_border_distance</item>
+    </style>
+
+    <style name="FormButton">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+
+    <style name="FormHeader" parent="FormField">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">20dp</item>
+    </style>
+
+    <style name="EqualWeightHorizontally">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="FormFieldsWrapper">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="RiskScoreBarField">
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="ScreenStyle">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:padding">@dimen/screen_border_distance</item>
+    </style>
+
+    <style name="ScrollbarStyle">
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:fadeScrollbars">false</item>
+        <item name="android:scrollbarThumbVertical">@drawable/scrollbar_vertical_thumb</item>
+        <item name="android:scrollbarTrackVertical">@drawable/scrollbar_vertical_track</item>
+        <item name="android:scrollbarSize">5dp</item>
+        <item name="android:scrollbarFadeDuration">0</item>
+        <item name="android:verticalScrollbarPosition">left</item>
+        <!--<item name="android:scrollbarDefaultDelayBeforeFade">1000</item>-->
+    </style>
+
+    <style name="RadioGroup">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:background">@drawable/radio_button_slider_group</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="RadioButton">
+        <item name="android:layout_width">75dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/radio_button_slider_background_color</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/radio_button_slider_text</item>
+    </style>
+</resources>

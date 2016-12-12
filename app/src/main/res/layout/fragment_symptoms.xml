@@ -1,0 +1,44 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="0dp"
+    android:layout_margin="0dp"
+    tools:context=".fragments.SymptomsFragment">
+
+    <ListView
+        android:id="@+id/symptoms_list"
+        style="@style/ScrollbarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/symptoms_footer_wrapper"
+        style="@style/ScreenStyle"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            style="@style/EqualWeightHorizontally"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/FormField"
+                android:text="@string/date_sick" />
+
+            <EditText
+                android:id="@+id/date_sick"
+                style="@style/FormField"
+                android:focusable="false" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_all_unk"
+            style="@style/EqualWeightHorizontally"
+            android:layout_gravity="center"
+            android:text="@string/all_unk" />
+    </LinearLayout>
+
+
+</LinearLayout>

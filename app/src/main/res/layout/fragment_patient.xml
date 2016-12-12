@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ScreenStyle"
+    android:padding="0dp"
+    android:layout_margin="0dp"
+    android:orientation="vertical"
+    tools:context=".fragments.PatientFragment">
+
+    <ScrollView
+        style="@style/ScrollbarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/screen_border_distance">
+
+        <LinearLayout
+            android:id="@+id/patient_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--Header(iamge + id)-->
+            <LinearLayout
+                style="@style/FormFieldsWrapper"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/patient_image"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/user" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="vertical">
+
+                    <Button
+                        android:id="@+id/button_barcode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/scan_oci_barcode" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/outbreak_id_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/oci" />
+
+                        <EditText
+                            android:id="@+id/outbreak_id"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:maxLength="10"
+                            android:maxWidth="150dp"
+                            android:textAlignment="center" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/app_id_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/etci" />
+
+                        <EditText
+                            android:id="@+id/app_id"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:clickable="false"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            android:maxLength="10"
+                            android:maxWidth="150dp"
+                            android:textAlignment="center" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                style="@style/FormHeader"
+                android:text="@string/personal_information" />
+            <!--Personal Information-->
+            <LinearLayout style="@style/FormFieldsWrapper">
+
+                <TextView
+                    style="@style/FormField"
+                    android:text="@string/last_name" />
+
+                <EditText
+                    android:id="@+id/last_name"
+                    style="@style/FormField" />
+
+                <TextView
+                    style="@style/FormField"
+                    android:text="@string/first_name" />
+
+                <EditText
+                    android:id="@+id/first_name"
+                    style="@style/FormField"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!--Gender-->
+            <LinearLayout style="@style/FormField">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:text="@string/gender" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:orientation="vertical">
+
+                    <RadioGroup
+                        android:id="@+id/patient_gender_rg"
+                        style="@style/RadioGroup">
+
+                        <RadioButton
+                            android:id="@+id/patient_male_rb"
+                            style="@style/RadioButton"
+                            android:text="@string/male" />
+
+                        <RadioButton
+                            android:id="@+id/patient_female_rb"
+                            style="@style/RadioButton"
+                            android:text="@string/female" />
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--Bdate-->
+            <LinearLayout
+                style="@style/FormFieldsWrapper"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/FormField"
+                        android:text="@string/birth_date" />
+
+                    <EditText
+                        android:id="@+id/birth_date"
+                        style="@style/FormField"
+                        android:layout_gravity="center_horizontal"
+                        android:focusable="false"
+                        android:text="DD/MM/YYYY" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/FormField"
+                        android:text="@string/age" />
+
+                    <EditText
+                        android:id="@+id/age"
+                        style="@style/FormField"
+                        android:layout_width="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:digits="0123456789"
+                        android:inputType="numberDecimal"
+                        android:maxLength="10"
+                        android:maxWidth="100dp"
+                        android:textAlignment="center" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--Permanent Residence-->
+            <LinearLayout style="@style/FormFieldsWrapper">
+
+                <TextView
+                    style="@style/FormHeader"
+                    android:text="@string/permanent_residence" />
+
+                <TextView
+                    style="@style/FormField"
+                    android:text="@string/head_of_household" />
+
+                <EditText
+                    android:id="@+id/household"
+                    style="@style/FormField" />
+
+                <TextView
+                    style="@style/FormField"
+                    android:text="@string/address" />
+
+                <EditText
+                    android:id="@+id/address"
+                    style="@style/FormField"
+                    android:lines="2" />
+
+                <TextView
+                    style="@style/FormField"
+                    android:text="@string/region" />
+
+                <EditText
+                    android:id="@+id/region"
+                    style="@style/FormField" />
+
+                <TextView
+                    style="@style/FormField"
+                    android:text="@string/city" />
+
+                <EditText
+                    android:id="@+id/city"
+                    style="@style/FormField" />
+
+                <TextView
+                    style="@style/FormField"
+                    android:text="@string/country" />
+
+                <EditText
+                    android:id="@+id/country"
+                    style="@style/FormField" />
+
+                <TextView
+                    style="@style/FormField"
+                    android:text="@string/phone_number" />
+
+                <EditText
+                    android:id="@+id/phone_number"
+                    style="@style/FormField"
+                    android:inputType="phone" />
+
+            </LinearLayout>
+
+            <!--Location Where Patient Became Ill-->
+            <TextView
+                style="@style/FormHeader"
+                android:text="@string/location_illness" />
+
+            <CheckBox
+                android:id="@+id/cb_same_address"
+                style="@style/FormField"
+                android:checked="true"
+                android:text="@string/same_as_residence_address" />
+
+            <LinearLayout
+                android:id="@+id/wrapper_location_illness"
+                style="@style/FormFieldsWrapper"
+                android:visibility="gone">
+
+                <TextView
+                    style="@style/FormField"
+                    android:text="@string/address" />
+
+                <EditText
+                    android:id="@+id/illness_address"
+                    style="@style/FormField"
+                    android:lines="2" />
+
+                <TextView
+                    style="@style/FormField"
+                    android:text="@string/region" />
+
+                <EditText
+                    android:id="@+id/illness_region"
+                    style="@style/FormField" />
+
+                <TextView
+                    style="@style/FormField"
+                    android:text="@string/city" />
+
+                <EditText
+                    android:id="@+id/illness_city"
+                    style="@style/FormField" />
+
+                <TextView
+                    style="@style/FormField"
+                    android:text="@string/country" />
+
+                <EditText
+                    android:id="@+id/illness_country"
+                    style="@style/FormField" />
+            </LinearLayout>
+
+            <!--Patient's Occupation-->
+            <LinearLayout style="@style/FormFieldsWrapper">
+
+                <TextView
+                    style="@style/FormHeader"
+                    android:text="@string/patient_occupation" />
+
+                <CheckBox
+                    android:id="@+id/cb_healthcare_worker"
+                    style="@style/FormField"
+                    android:text="@string/healthcare_worker" />
+
+                <LinearLayout
+                    android:id="@+id/wrapper_healthcare"
+                    style="@style/FormFieldsWrapper"
+                    android:visibility="gone">
+
+                    <TextView
+                        style="@style/FormField"
+                        android:text="@string/position" />
+
+                    <EditText
+                        android:id="@+id/healthcare_position"
+                        style="@style/FormField" />
+
+                    <TextView
+                        style="@style/FormField"
+                        android:text="@string/healthcare_facility" />
+
+                    <EditText
+                        android:id="@+id/healthcare_facility"
+                        style="@style/FormField" />
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/cb_other_occupation"
+                    style="@style/FormField"
+                    android:text="@string/other" />
+
+                <LinearLayout
+                    android:id="@+id/wrapper_other_occupation"
+                    style="@style/FormFieldsWrapper"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/other_occupation_label"
+                        style="@style/FormField"
+                        android:text="@string/please_specify_occupation" />
+
+                    <EditText
+                        android:id="@+id/other_occupation"
+                        style="@style/FormField" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--Comment-->
+            <LinearLayout style="@style/FormFieldsWrapper">
+
+                <TextView
+                    style="@style/FormHeader"
+                    android:text="@string/comment" />
+
+                <EditText
+                    android:id="@+id/comment"
+                    style="@style/FormField"
+                    android:gravity="top"
+                    android:minLines="3"
+                    android:scrollbars="vertical" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

@@ -1,0 +1,126 @@
+<resources>
+    <string name="app_name">Ebola Worker</string>
+    <!-- String values to pass data in intents -->
+    <string name="PATIENT_ID">patient_id</string>
+
+    <item type="id" name="PATIENT_ID_TAG" />
+
+
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable social recommendations</string>
+    <string name="pref_description_social_recommendations">Recommendations for people to contact
+        based on your message history
+    </string>
+
+    <string name="pref_title_display_name">Display name</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+    <string name="scan_oci_barcode">Scan OCI barcode</string>
+    <string name="oci">OCI:</string>
+    <string name="etci">ETCI:</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="last_name">Last Name</string>
+    <string name="first_name">First Name</string>
+    <string name="gender">Gender</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="birth_date">Birth date</string>
+    <string name="age">Age</string>
+    <string name="permanent_residence">Permanent Residence</string>
+    <string name="head_of_household">Contact Person</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="phone_number">Phone number</string>
+    <string name="location_illness">Location Where Patient Became Ill</string>
+    <string name="patient_occupation">Patient\'s Occupation</string>
+    <string name="healthcare_worker">Healthcare worker (includes anyone involved with the patient: nurse, ambulance driver, hospital cleaner, etc.)</string>
+    <string name="position">Position</string>
+    <string name="healthcare_facility">Healthcare facility</string>
+    <string name="other">Other</string>
+    <string name="please_specify_occupation">Please specify occupation</string>
+    <string name="comment">Comment</string>
+    <string name="same_as_residence_address">Same as residence address</string>
+    <string name="search_specify_promt">Please enter some information about the patient</string>
+    <string name="search_no_patient_msg">We couldn\'t find any patient with the information you provided</string>
+    <string name="new_patient">New Patient</string>
+    <string name="search_patient">Search Patient</string>
+    <string name="region">Region</string>
+    <string name="country">Country</string>
+    <string name="yes">Yes</string>
+    <string name="symptom">Symptom</string>
+    <string name="no">No</string>
+    <string name="unknown">Unknown</string>
+    <string name="PATIENTS_LIST">patients_list</string>
+    <string name="action_exit">Exit</string>
+    <string name="triage">Triage</string>
+    <string name="symptoms">Symptoms</string>
+    <string name="risk_score">Risk Score</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="show_all_patients">Show All Patients</string>
+    <string name="date_sick">Date Patient Got Sick</string>
+    <string name="all_unk">Set Rest Unknown</string>
+    <string name="risk_death_input_results">Please enter the medical ebola test results to see the severity score</string>
+    <string name="risk_death_no_ebola">Ebola is confirmed negative.</string>
+</resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <include
+        layout="@layout/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center">
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_margin="20dp"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="fill_parent"
+                android:onClick="triage"
+                android:text="@string/new_patient" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_margin="20dp"
+            android:gravity="center">
+
+            <Button
+                android:layout_width="200dp"
+                android:layout_height="fill_parent"
+                android:onClick="searchPatient"
+                android:text="@string/search_patient" />
+        </TableRow>
+
+
+    </TableLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/settings"
+        android:layout_alignParentBottom="true"
+        android:padding="10dp"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/update"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:padding="10dp"/>
+</RelativeLayout>

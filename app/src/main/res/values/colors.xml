@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFC107</color>
+    <color name="colorPrimaryDark">#FFA000</color>
+
+    <color name="colorAccent">#03A9F4</color>
+    <color name="colorAccentDark">#0279b1</color>
+
+    <color name="colorLowRisk">#4CAF50</color>
+    <color name="colorMedRisk">#FFEB3B</color>
+    <color name="colorHighRisk">#F44336</color>
+    <color name="actionBarText">#FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+</resources>

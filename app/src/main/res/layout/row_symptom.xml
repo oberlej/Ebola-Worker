@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/SymptomRow"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/symptom_row_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="40"
+        android:padding="0dp"
+        android:text="@string/symptom"
+        android:textColor="@android:color/black" />
+
+    <!--<RadioGroup-->
+    <!--android:id="@+id/symptom_row_radiog"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_weight="3"-->
+    <!--android:orientation="horizontal">-->
+
+    <!--<RadioButton-->
+    <!--android:id="@+id/symptom_radio_yes"-->
+    <!--style="@style/EqualWeightHorizontally"-->
+    <!--android:text="@string/yes" />-->
+
+    <!--<RadioButton-->
+    <!--android:id="@+id/symptom_radio_no"-->
+    <!--style="@style/EqualWeightHorizontally"-->
+    <!--android:text="@string/no" />-->
+
+    <!--<RadioButton-->
+    <!--android:id="@+id/symptom_radio_unk"-->
+    <!--style="@style/EqualWeightHorizontally"-->
+    <!--android:text="@string/unknown" />-->
+    <!--</RadioGroup>-->
+
+
+    <RadioGroup
+        android:id="@+id/symptom_row_rg"
+        style="@style/RadioGroup"
+        android:layout_width="0dp"
+        android:layout_weight="60">
+
+        <RadioButton
+            android:id="@+id/symptom_radio_yes"
+            style="@style/RadioButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/yes" />
+
+        <RadioButton
+            android:id="@+id/symptom_radio_no"
+            style="@style/RadioButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/no" />
+
+        <RadioButton
+            android:id="@+id/symptom_radio_unk"
+            style="@style/RadioButton"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@string/unknown" />
+    </RadioGroup>
+</LinearLayout>

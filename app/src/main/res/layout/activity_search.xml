@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/FormField"
+        android:text="Last Name" />
+
+    <EditText
+        android:id="@+id/search_last_name"
+        style="@style/FormField" />
+
+    <TextView
+        style="@style/FormField"
+        android:text="First Name" />
+
+    <EditText
+        android:id="@+id/search_first_name"
+        style="@style/FormField" />
+
+    <Button
+        android:id="@+id/search_btn"
+        style="@style/FormButton"
+        android:onClick="search"
+        android:text="@string/show_all_patients"/>
+</LinearLayout>

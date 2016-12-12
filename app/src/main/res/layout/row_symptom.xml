@@ -13,30 +13,6 @@
         android:text="@string/symptom"
         android:textColor="@android:color/black" />
 
-    <!--<RadioGroup-->
-    <!--android:id="@+id/symptom_row_radiog"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_weight="3"-->
-    <!--android:orientation="horizontal">-->
-
-    <!--<RadioButton-->
-    <!--android:id="@+id/symptom_radio_yes"-->
-    <!--style="@style/EqualWeightHorizontally"-->
-    <!--android:text="@string/yes" />-->
-
-    <!--<RadioButton-->
-    <!--android:id="@+id/symptom_radio_no"-->
-    <!--style="@style/EqualWeightHorizontally"-->
-    <!--android:text="@string/no" />-->
-
-    <!--<RadioButton-->
-    <!--android:id="@+id/symptom_radio_unk"-->
-    <!--style="@style/EqualWeightHorizontally"-->
-    <!--android:text="@string/unknown" />-->
-    <!--</RadioGroup>-->
-
-
     <RadioGroup
         android:id="@+id/symptom_row_rg"
         style="@style/RadioGroup"

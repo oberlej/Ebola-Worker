@@ -2,12 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/ScreenStyle"
-    android:padding="0dp"
     android:layout_margin="0dp"
     android:orientation="vertical"
+    android:padding="0dp"
     tools:context=".fragments.PatientFragment">
 
     <ScrollView
+        android:id="@+id/patient_scrollview"
         style="@style/ScrollbarStyle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -97,32 +98,39 @@
             <!--Personal Information-->
             <LinearLayout style="@style/FormFieldsWrapper">
 
-                <TextView
-                    style="@style/FormField"
-                    android:text="@string/last_name" />
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/patient_last_name_layout"
+                    style="@style/FormField">
 
-                <EditText
-                    android:id="@+id/last_name"
-                    style="@style/FormField" />
+                    <EditText
+                        android:id="@+id/patient_last_name"
+                        style="@style/FormField"
+                        android:hint="@string/last_name" />
+                </android.support.design.widget.TextInputLayout>
 
-                <TextView
-                    style="@style/FormField"
-                    android:text="@string/first_name" />
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/patient_first_name_layout"
+                    style="@style/FormField">
 
-                <EditText
-                    android:id="@+id/first_name"
-                    style="@style/FormField"
-                    android:layout_height="wrap_content" />
+                    <EditText
+                        android:id="@+id/first_name"
+                        style="@style/FormField"
+                        android:hint="@string/first_name" />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
             <!--Gender-->
-            <LinearLayout style="@style/FormField">
+            <LinearLayout
+                style="@style/FormField"
+                android:paddingBottom="@dimen/screen_border_distance"
+                android:paddingTop="@dimen/screen_border_distance">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="@string/gender" />
 
                 <LinearLayout
@@ -156,42 +164,44 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
+                    android:layout_gravity="center"
+                    android:layout_weight="1">
 
-                    <TextView
-                        style="@style/FormField"
-                        android:text="@string/birth_date" />
+                    <android.support.design.widget.TextInputLayout style="@style/FormField">
 
-                    <EditText
-                        android:id="@+id/birth_date"
-                        style="@style/FormField"
-                        android:layout_gravity="center_horizontal"
-                        android:focusable="false"
-                        android:text="DD/MM/YYYY" />
+                        <EditText
+                            android:id="@+id/birth_date"
+                            style="@style/Date"
+                            android:layout_gravity="center"
+                            android:hint="@string/birth_date" />
+                    </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        style="@style/FormField"
-                        android:text="@string/age" />
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="12dp"
+                    android:layout_weight="1">
 
                     <EditText
                         android:id="@+id/age"
                         style="@style/FormField"
-                        android:layout_width="100dp"
-                        android:layout_gravity="center_horizontal"
+                        android:layout_width="70dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/age_rectangle"
                         android:digits="0123456789"
+                        android:gravity="center"
                         android:inputType="numberDecimal"
-                        android:maxLength="10"
-                        android:maxWidth="100dp"
-                        android:textAlignment="center" />
-                </LinearLayout>
+                        android:maxLength="3"
+                        android:maxWidth="70dp" />
+
+                    <TextView
+                        style="@style/FormField"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/age"
+                        android:paddingLeft="10dp"
+                        android:text="@string/years" />
+                </RelativeLayout>
             </LinearLayout>
 
             <!--Permanent Residence-->
@@ -201,56 +211,54 @@
                     style="@style/FormHeader"
                     android:text="@string/permanent_residence" />
 
-                <TextView
-                    style="@style/FormField"
-                    android:text="@string/head_of_household" />
+                <android.support.design.widget.TextInputLayout style="@style/FormField">
 
-                <EditText
-                    android:id="@+id/household"
-                    style="@style/FormField" />
+                    <EditText
+                        android:id="@+id/household"
+                        style="@style/FormField"
+                        android:hint="@string/head_of_household" />
+                </android.support.design.widget.TextInputLayout>
 
-                <TextView
-                    style="@style/FormField"
-                    android:text="@string/address" />
+                <android.support.design.widget.TextInputLayout style="@style/FormField">
 
-                <EditText
-                    android:id="@+id/address"
-                    style="@style/FormField"
-                    android:lines="2" />
+                    <EditText
+                        android:id="@+id/address"
+                        style="@style/FormAddress"
+                        android:hint="@string/address" />
+                </android.support.design.widget.TextInputLayout>
 
-                <TextView
-                    style="@style/FormField"
-                    android:text="@string/region" />
+                <android.support.design.widget.TextInputLayout style="@style/FormField">
 
-                <EditText
-                    android:id="@+id/region"
-                    style="@style/FormField" />
+                    <EditText
+                        android:id="@+id/region"
+                        style="@style/FormField"
+                        android:hint="@string/region" />
+                </android.support.design.widget.TextInputLayout>
 
-                <TextView
-                    style="@style/FormField"
-                    android:text="@string/city" />
+                <android.support.design.widget.TextInputLayout style="@style/FormField">
 
-                <EditText
-                    android:id="@+id/city"
-                    style="@style/FormField" />
+                    <EditText
+                        android:id="@+id/city"
+                        style="@style/FormField"
+                        android:hint="@string/city" />
+                </android.support.design.widget.TextInputLayout>
 
-                <TextView
-                    style="@style/FormField"
-                    android:text="@string/country" />
+                <android.support.design.widget.TextInputLayout style="@style/FormField">
 
-                <EditText
-                    android:id="@+id/country"
-                    style="@style/FormField" />
+                    <EditText
+                        android:id="@+id/country"
+                        style="@style/FormField"
+                        android:hint="@string/country" />
+                </android.support.design.widget.TextInputLayout>
 
-                <TextView
-                    style="@style/FormField"
-                    android:text="@string/phone_number" />
+                <android.support.design.widget.TextInputLayout style="@style/FormField">
 
-                <EditText
-                    android:id="@+id/phone_number"
-                    style="@style/FormField"
-                    android:inputType="phone" />
-
+                    <EditText
+                        android:id="@+id/phone_number"
+                        style="@style/FormField"
+                        android:hint="@string/phone_number"
+                        android:inputType="phone" />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
             <!--Location Where Patient Became Ill-->
@@ -269,38 +277,37 @@
                 style="@style/FormFieldsWrapper"
                 android:visibility="gone">
 
-                <TextView
-                    style="@style/FormField"
-                    android:text="@string/address" />
+                <android.support.design.widget.TextInputLayout style="@style/FormField">
 
-                <EditText
-                    android:id="@+id/illness_address"
-                    style="@style/FormField"
-                    android:lines="2" />
+                    <EditText
+                        android:id="@+id/illness_address"
+                        style="@style/FormAddress"
+                        android:hint="@string/location_illness" />
+                </android.support.design.widget.TextInputLayout>
 
-                <TextView
-                    style="@style/FormField"
-                    android:text="@string/region" />
+                <android.support.design.widget.TextInputLayout style="@style/FormField">
 
-                <EditText
-                    android:id="@+id/illness_region"
-                    style="@style/FormField" />
+                    <EditText
+                        android:id="@+id/illness_region"
+                        style="@style/FormField"
+                        android:hint="@string/region" />
+                </android.support.design.widget.TextInputLayout>
 
-                <TextView
-                    style="@style/FormField"
-                    android:text="@string/city" />
+                <android.support.design.widget.TextInputLayout style="@style/FormField">
 
-                <EditText
-                    android:id="@+id/illness_city"
-                    style="@style/FormField" />
+                    <EditText
+                        android:id="@+id/illness_city"
+                        style="@style/FormField"
+                        android:hint="@string/city" />
+                </android.support.design.widget.TextInputLayout>
 
-                <TextView
-                    style="@style/FormField"
-                    android:text="@string/country" />
+                <android.support.design.widget.TextInputLayout style="@style/FormField">
 
-                <EditText
-                    android:id="@+id/illness_country"
-                    style="@style/FormField" />
+                    <EditText
+                        android:id="@+id/illness_country"
+                        style="@style/FormField"
+                        android:hint="@string/country" />
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
 
             <!--Patient's Occupation-->
@@ -320,21 +327,21 @@
                     style="@style/FormFieldsWrapper"
                     android:visibility="gone">
 
-                    <TextView
-                        style="@style/FormField"
-                        android:text="@string/position" />
+                    <android.support.design.widget.TextInputLayout style="@style/FormField">
 
-                    <EditText
-                        android:id="@+id/healthcare_position"
-                        style="@style/FormField" />
+                        <EditText
+                            android:id="@+id/healthcare_position"
+                            style="@style/FormField"
+                            android:hint="@string/position" />
+                    </android.support.design.widget.TextInputLayout>
 
-                    <TextView
-                        style="@style/FormField"
-                        android:text="@string/healthcare_facility" />
+                    <android.support.design.widget.TextInputLayout style="@style/FormField">
 
-                    <EditText
-                        android:id="@+id/healthcare_facility"
-                        style="@style/FormField" />
+                        <EditText
+                            android:id="@+id/healthcare_facility"
+                            style="@style/FormField"
+                            android:hint="@string/healthcare_facility" />
+                    </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
                 <CheckBox
@@ -347,30 +354,29 @@
                     style="@style/FormFieldsWrapper"
                     android:visibility="gone">
 
-                    <TextView
-                        android:id="@+id/other_occupation_label"
-                        style="@style/FormField"
-                        android:text="@string/please_specify_occupation" />
+                    <android.support.design.widget.TextInputLayout style="@style/FormField">
 
-                    <EditText
-                        android:id="@+id/other_occupation"
-                        style="@style/FormField" />
+                        <EditText
+                            android:id="@+id/other_occupation"
+                            style="@style/FormField"
+                            android:hint="@string/please_specify_occupation" />
+                    </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
             </LinearLayout>
 
             <!--Comment-->
             <LinearLayout style="@style/FormFieldsWrapper">
 
-                <TextView
-                    style="@style/FormHeader"
-                    android:text="@string/comment" />
+                <android.support.design.widget.TextInputLayout style="@style/FormField">
 
-                <EditText
-                    android:id="@+id/comment"
-                    style="@style/FormField"
-                    android:gravity="top"
-                    android:minLines="3"
-                    android:scrollbars="vertical" />
+                    <EditText
+                        android:id="@+id/comment"
+                        style="@style/FormAddress"
+                        android:hint="@string/comment"
+                        android:lines="3"
+                        android:minLines="3"
+                        android:maxLines="5"/>
+                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

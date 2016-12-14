@@ -7,19 +7,23 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.example.ebolaworker.helper.DatabaseHelper;
@@ -90,7 +94,7 @@ public class PatientFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if(mView==null) {
+        if (mView == null) {
             mView = inflater.inflate(R.layout.fragment_patient, container, false);
             initFields();
             updateFields();
@@ -162,7 +166,7 @@ public class PatientFragment extends Fragment implements View.OnClickListener {
     public void initFields() {
 
         mDBHelper = DatabaseHelper.getInstance(getContext());
-        mLastName = (EditText) mView.findViewById(R.id.last_name);
+        mLastName = (EditText) mView.findViewById(R.id.patient_last_name);
         mFirstName = (EditText) mView.findViewById(R.id.first_name);
         mAge = (EditText) mView.findViewById(R.id.age);
         mHousehold = (EditText) mView.findViewById(R.id.household);
@@ -251,6 +255,59 @@ public class PatientFragment extends Fragment implements View.OnClickListener {
         mView.findViewById(R.id.button_barcode).setOnClickListener(this);
         mView.findViewById(R.id.cb_other_occupation).setOnClickListener(this);
         mView.findViewById(R.id.cb_healthcare_worker).setOnClickListener(this);
+        mAddress.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                ((ScrollView) mView.findViewById(R.id.patient_scrollview)).requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+        mIllnessAddress.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                ((ScrollView) mView.findViewById(R.id.patient_scrollview)).requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+        mComment.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                ((ScrollView) mView.findViewById(R.id.patient_scrollview)).requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+        mFirstName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                validateEditText(mFirstName,(TextInputLayout)mView.findViewById(R.id.patient_first_name_layout));
+            }
+        });
+        mLastName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                validateEditText(mLastName,(TextInputLayout)mView.findViewById(R.id.patient_last_name_layout));
+            }
+        });
 
     }
 
@@ -377,41 +434,53 @@ public class PatientFragment extends Fragment implements View.OnClickListener {
         startActivityForResult(intent, IntentIntegrator.REQUEST_CODE);
     }
 
-    private boolean validateEditText(EditText t) {
-        boolean b = t.getText().toString() != null && !t.getText().toString().isEmpty();
-        if (!b) t.setError("This field is mandatory!");
+    private boolean validateEditText(EditText t, TextInputLayout l) {
+        boolean b = t.getText().toString() != null && !t.getText().toString().trim().isEmpty();
+        if (!b) {
+            requestFocus(t);
+            l.setError("This field is mandatory!");
+        } else {
+            l.setErrorEnabled(false);
+        }
+
         return b;
     }
 
+    private void requestFocus(View view) {
+        if (view.requestFocus()) {
+            getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+        }
+    }
+
     public boolean validatePatient() {
-        boolean b1 = validateEditText(mLastName);
-        boolean b2 = validateEditText(mFirstName);
+        boolean b1 = validateEditText(mLastName, (TextInputLayout) mView.findViewById(R.id.patient_last_name_layout));
+        boolean b2 = validateEditText(mFirstName, (TextInputLayout) mView.findViewById(R.id.patient_first_name_layout));
         return b1 && b2;
     }
 
     public long savePatient(long patientId) {
         //save patient
         ContentValues values = new ContentValues();
-        values.put(DatabaseHelper.LAST_NAME, mLastName.getText().toString());
-        values.put(DatabaseHelper.FIRST_NAME, mFirstName.getText().toString());
+        values.put(DatabaseHelper.LAST_NAME, mLastName.getText().toString().trim());
+        values.put(DatabaseHelper.FIRST_NAME, mFirstName.getText().toString().trim());
         values.put(DatabaseHelper.BIRTH_DATE, dateFormat.format(mCalendar.getTime()));
-        values.put(DatabaseHelper.HOUSEHOLD, mHousehold.getText().toString());
-        values.put(DatabaseHelper.ADDRESS, mAddress.getText().toString());
-        values.put(DatabaseHelper.REGION, mRegion.getText().toString());
-        values.put(DatabaseHelper.CITY, mCity.getText().toString());
-        values.put(DatabaseHelper.COUNTRY, mCountry.getText().toString());
-        values.put(DatabaseHelper.PHONE, mPhone.getText().toString());
+        values.put(DatabaseHelper.HOUSEHOLD, mHousehold.getText().toString().trim());
+        values.put(DatabaseHelper.ADDRESS, mAddress.getText().toString().trim());
+        values.put(DatabaseHelper.REGION, mRegion.getText().toString().trim());
+        values.put(DatabaseHelper.CITY, mCity.getText().toString().trim());
+        values.put(DatabaseHelper.COUNTRY, mCountry.getText().toString().trim());
+        values.put(DatabaseHelper.PHONE, mPhone.getText().toString().trim());
         values.put(DatabaseHelper.SAME_ADDRESS_ILLNESS, mCBSameAddress.isChecked() ? 1 : 0);
         if (!mCBSameAddress.isChecked()) {
-            values.put(DatabaseHelper.ADDRESS_ILLNESS, mIllnessAddress.getText().toString());
-            values.put(DatabaseHelper.REGION_ILLNESS, mIllnessRegion.getText().toString());
-            values.put(DatabaseHelper.CITY_ILLNESS, mIllnessCity.getText().toString());
-            values.put(DatabaseHelper.COUNTRY_ILLNESS, mIllnessCountry.getText().toString());
+            values.put(DatabaseHelper.ADDRESS_ILLNESS, mIllnessAddress.getText().toString().trim());
+            values.put(DatabaseHelper.REGION_ILLNESS, mIllnessRegion.getText().toString().trim());
+            values.put(DatabaseHelper.CITY_ILLNESS, mIllnessCity.getText().toString().trim());
+            values.put(DatabaseHelper.COUNTRY_ILLNESS, mIllnessCountry.getText().toString().trim());
         }
-        values.put(DatabaseHelper.HEALTHCARE_POSITION, mHealthcarePosition.getText().toString());
-        values.put(DatabaseHelper.HEALTHCARE_FACILITY, mHealthcareFacility.getText().toString());
-        values.put(DatabaseHelper.OTHER_OCCUPATION, mOtherOccupatino.getText().toString());
-        values.put(DatabaseHelper.COMMENT, mComment.getText().toString());
+        values.put(DatabaseHelper.HEALTHCARE_POSITION, mHealthcarePosition.getText().toString().trim());
+        values.put(DatabaseHelper.HEALTHCARE_FACILITY, mHealthcareFacility.getText().toString().trim());
+        values.put(DatabaseHelper.OTHER_OCCUPATION, mOtherOccupatino.getText().toString().trim());
+        values.put(DatabaseHelper.COMMENT, mComment.getText().toString().trim());
         values.put(DatabaseHelper.GENDER, mRBMale.isChecked() ? DatabaseHelper.Genders.MALE.ordinal() : DatabaseHelper.Genders.FEMALE.ordinal());
         values.put(DatabaseHelper.DATE_ILLNESS, "-1");
 

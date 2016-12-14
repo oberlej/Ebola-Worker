@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="weightLow">30</integer>
+    <integer name="weightMed">20</integer>
+    <integer name="weightHigh">50</integer>
+</resources>

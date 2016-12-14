@@ -1,11 +1,8 @@
 <resources>
-    <integer name="weightLow">30</integer>
-    <integer name="weightMed">50</integer>
-    <integer name="weightHigh">20</integer>
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+        <item name="android:textSize">@dimen/text_size</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
         <item name="colorPrimary">@color/colorPrimary</item>
@@ -50,9 +47,18 @@
     </style>
 
     <style name="FormField">
+        <item name="android:singleLine">true</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_marginTop">7dp</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="FormAddress" parent="FormField">
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:gravity">top|left</item>
     </style>
 
     <style name="SymptomRow">
@@ -88,8 +94,9 @@
         <item name="android:orientation">vertical</item>
     </style>
 
+
     <style name="RiskScoreBarField">
-        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_height">@dimen/risk_score_bar_height</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_margin">0dp</item>
@@ -132,5 +139,11 @@
         <item name="android:button">@null</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@drawable/radio_button_slider_text</item>
+    </style>
+
+    <style name="Date" parent="FormField">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:drawableRight">@drawable/date</item>
+        <item name="android:focusable">false</item>
     </style>
 </resources>

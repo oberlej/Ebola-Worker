@@ -1,194 +1,249 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/ScreenStyle"
+    android:layout_margin="0dp"
     android:orientation="vertical"
+    android:padding="0dp"
     tools:context=".fragments.RiskScoreFragment">
 
-    <!--wrapper risk score-->
-    <TextView
-        style="@style/FormHeader"
+    <ScrollView
+        android:id="@+id/risks_scrollview"
+        style="@style/ScrollbarStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ebola Infection Risk Score" />
+        android:layout_height="match_parent"
+        android:padding="@dimen/screen_border_distance">
 
-    <LinearLayout
-        android:id="@+id/risk_ebola_wrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-        <!--bars label-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
+            <!--wrapper risk score-->
+            <TextView
+                style="@style/FormHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ebola Infection Risk Score" />
+
+            <LinearLayout
+                android:id="@+id/risk_ebola_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <!--bars label-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/risk_ebola_low"
+                        style="@style/EqualWeightHorizontally"
+                        android:gravity="left"
+                        android:text="Low Risk" />
+
+                    <TextView
+                        android:id="@+id/risk_ebola_high"
+                        style="@style/EqualWeightHorizontally"
+                        android:gravity="right"
+                        android:text="High Risk" />
+                </LinearLayout>
+                <!--the actual bars        -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/risk_bar_ebola_low"
+                            style="@style/RiskScoreBarField"
+                            android:layout_weight="@integer/weightLow"
+                            android:background="@color/colorLowRisk" />
+
+                        <TextView
+                            android:id="@+id/risk_bar_ebola_med"
+                            style="@style/RiskScoreBarField"
+                            android:layout_weight="@integer/weightMed"
+                            android:background="@color/colorMedRisk" />
+
+                        <TextView
+                            android:id="@+id/risk_bar_ebola_high"
+                            style="@style/RiskScoreBarField"
+                            android:layout_weight="@integer/weightHigh"
+                            android:background="@color/colorHighRisk" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/risk_ebola_score_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/risk_score_bar_height"
+                        android:gravity="left|center_vertical" />
+                </RelativeLayout>
+                <!--the percentage-->
+                <Button
+                    android:id="@+id/risk_ebola_score"
+                    style="@style/FormHeader"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:gravity="center" />
+                <!--epobla test result input-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="This App adapts the Ebola-infection risk calculation according to your population.
+Train your risk calculator by entering the patient’s Ebola PCR test result." />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingTop="10dp"
+                    android:text="Ebola test result"
+                    android:textStyle="bold" />
+
+
+                <RadioGroup
+                    android:id="@+id/risk_ebola_rg"
+                    style="@style/RadioGroup">
+
+                    <RadioButton
+                        android:id="@+id/risk_ebola_yes_rb"
+                        style="@style/RadioButton"
+                        android:text="@string/yes" />
+
+                    <RadioButton
+                        android:id="@+id/risk_ebola_no_rb"
+                        style="@style/RadioButton"
+                        android:text="@string/no" />
+
+                    <RadioButton
+                        android:id="@+id/risk_ebola_unk_rb"
+                        style="@style/RadioButton"
+                        android:text="@string/unknown" />
+                </RadioGroup>
+
+
+            </LinearLayout>
+            <!--wrapper death risk-->
+            <TextView
+                style="@style/FormHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ebola Severity Score" />
+
+            <LinearLayout
+                android:id="@+id/risk_death_wrapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <!--bars label-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/risk_death_low"
+                        style="@style/EqualWeightHorizontally"
+                        android:gravity="left"
+                        android:text="Low Risk" />
+
+                    <TextView
+                        android:id="@+id/risk_death_high"
+                        style="@style/EqualWeightHorizontally"
+                        android:gravity="right"
+                        android:text="High Risk" />
+                </LinearLayout>
+                <!--the actual bars        -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/risk_bar_death_low"
+                            style="@style/RiskScoreBarField"
+                            android:layout_weight="@integer/weightLow"
+                            android:background="@color/colorLowRisk" />
+
+                        <TextView
+                            android:id="@+id/risk_bar_death_med"
+                            style="@style/RiskScoreBarField"
+                            android:layout_weight="@integer/weightMed"
+                            android:background="@color/colorMedRisk" />
+
+                        <TextView
+                            android:id="@+id/risk_bar_death_high"
+                            style="@style/RiskScoreBarField"
+                            android:layout_weight="@integer/weightHigh"
+                            android:background="@color/colorHighRisk" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/risk_death_score_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/risk_score_bar_height"
+                        android:gravity="left|center_vertical" />
+                </RelativeLayout>
+                <!--the percentage-->
+                <Button
+                    android:id="@+id/risk_death_score"
+                    style="@style/FormHeader"
+                    android:background="@android:color/transparent"
+                    android:clickable="false"
+                    android:gravity="center" />
+                <!--death result input-->
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="This App adapts the Ebola-severity calculation according to your population.
+Train your risk calculator by entering the patient’s final outcome." />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:text="Dead"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/risk_death_rg"
+                    style="@style/RadioGroup">
+
+                    <RadioButton
+                        android:id="@+id/risk_death_yes_rb"
+                        style="@style/RadioButton"
+                        android:text="@string/yes" />
+
+                    <RadioButton
+                        android:id="@+id/risk_death_no_rb"
+                        style="@style/RadioButton"
+                        android:text="@string/no" />
+                </RadioGroup>
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/risk_ebola_low"
-                style="@style/EqualWeightHorizontally"
-                android:gravity="left"
-                android:text="Low Risk" />
-
-            <TextView
-                android:id="@+id/risk_ebola_high"
-                style="@style/EqualWeightHorizontally"
-                android:gravity="right"
-                android:text="High Risk" />
+                android:id="@+id/risk_death_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/risk_death_input_results" />
         </LinearLayout>
-        <!--the actual bars        -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/risk_bar_ebola_low"
-                style="@style/RiskScoreBarField"
-                android:layout_weight="@integer/weightLow"
-                android:background="@color/colorLowRisk" />
-
-            <TextView
-                android:id="@+id/risk_bar_ebola_med"
-                style="@style/RiskScoreBarField"
-                android:layout_weight="@integer/weightMed"
-                android:background="@color/colorMedRisk" />
-
-            <TextView
-                android:id="@+id/risk_bar_ebola_high"
-                style="@style/RiskScoreBarField"
-                android:layout_weight="@integer/weightHigh"
-                android:background="@color/colorHighRisk" />
-
-        </LinearLayout>
-        <!--the percentage-->
-        <Button
-            android:id="@+id/risk_ebola_score"
-            style="@style/FormHeader"
-            android:background="@android:color/transparent"
-            android:clickable="false"
-            android:gravity="center" />
-        <!--epobla test result input-->
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Ebola test result" />
-
-
-        <RadioGroup
-            android:id="@+id/risk_ebola_rg"
-            style="@style/RadioGroup">
-
-            <RadioButton
-                android:id="@+id/risk_ebola_yes_rb"
-                style="@style/RadioButton"
-                android:text="@string/yes" />
-
-            <RadioButton
-                android:id="@+id/risk_ebola_no_rb"
-                style="@style/RadioButton"
-                android:text="@string/no" />
-
-            <RadioButton
-                android:id="@+id/risk_ebola_unk_rb"
-                style="@style/RadioButton"
-                android:text="@string/unknown" />
-        </RadioGroup>
-
-
-    </LinearLayout>
-    <!--wrapper death risk-->
-    <TextView
-        style="@style/FormHeader"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ebola Severity Score" />
-
-    <LinearLayout
-        android:id="@+id/risk_death_wrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:visibility="gone">
-
-        <!--bars label-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/risk_death_low"
-                style="@style/EqualWeightHorizontally"
-                android:gravity="left"
-                android:text="Low Risk" />
-
-            <TextView
-                android:id="@+id/risk_death_high"
-                style="@style/EqualWeightHorizontally"
-                android:gravity="right"
-                android:text="High Risk" />
-        </LinearLayout>
-        <!--the actual bars        -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/risk_bar_death_low"
-                style="@style/RiskScoreBarField"
-                android:layout_weight="@integer/weightLow"
-                android:background="@color/colorLowRisk" />
-
-            <TextView
-                android:id="@+id/risk_bar_death_med"
-                style="@style/RiskScoreBarField"
-                android:layout_weight="@integer/weightMed"
-                android:background="@color/colorMedRisk" />
-
-            <TextView
-                android:id="@+id/risk_bar_death_high"
-                style="@style/RiskScoreBarField"
-                android:layout_weight="@integer/weightHigh"
-                android:background="@color/colorHighRisk" />
-
-        </LinearLayout>
-        <!--the percentage-->
-        <Button
-            android:id="@+id/risk_death_score"
-            style="@style/FormHeader"
-            android:background="@android:color/transparent"
-            android:clickable="false"
-            android:gravity="center" />
-        <!--death result input-->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Dead" />
-
-        <RadioGroup
-            android:id="@+id/risk_death_rg"
-            style="@style/RadioGroup">
-
-            <RadioButton
-                android:id="@+id/risk_death_yes_rb"
-                style="@style/RadioButton"
-                android:text="@string/yes" />
-
-            <RadioButton
-                android:id="@+id/risk_death_no_rb"
-                style="@style/RadioButton"
-                android:text="@string/no" />
-        </RadioGroup>
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/risk_death_placeholder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/risk_death_input_results" />
+    </ScrollView>
 </LinearLayout>

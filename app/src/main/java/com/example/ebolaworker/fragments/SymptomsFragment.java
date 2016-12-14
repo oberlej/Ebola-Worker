@@ -215,6 +215,10 @@ public class SymptomsFragment extends Fragment implements View.OnClickListener {
         return allSet;
     }
 
+    public List<Symptom> getSymptoms(){
+        return ((SymptomArrayAdapter) ((HeaderViewListAdapter)listView.getAdapter()).getWrappedAdapter()).getData();
+    }
+
     public void saveSymptoms(long patientId) {
         for (Symptom s : ((SymptomArrayAdapter) ((HeaderViewListAdapter)listView.getAdapter()).getWrappedAdapter()).getData()) {
             ContentValues values = new ContentValues();

@@ -2,9 +2,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="0dp"
     android:orientation="vertical"
     android:padding="0dp"
-    android:layout_margin="0dp"
     tools:context=".fragments.SymptomsFragment">
 
     <ListView
@@ -17,27 +17,60 @@
         android:id="@+id/symptoms_footer_wrapper"
         style="@style/ScreenStyle"
         android:layout_marginTop="0dp"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Did the patient have contact with a suspected or confirmed Ebola case in the last month ?"
+            android:textColor="@android:color/black" />
+
+        <RadioGroup
+            android:id="@+id/symptom_row_rg"
+            style="@style/RadioGroup"
+            android:layout_marginTop="10dp">
+
+            <RadioButton
+                android:id="@+id/symptom_contact_yes"
+                style="@style/RadioButton"
+                android:text="@string/yes" />
+
+            <RadioButton
+                android:id="@+id/symptom_contact_no"
+                style="@style/RadioButton"
+                android:text="@string/no" />
+
+            <RadioButton
+                android:id="@+id/symptom_contact_unk"
+                style="@style/RadioButton"
+                android:text="@string/unknown" />
+        </RadioGroup>
 
         <LinearLayout
-            style="@style/EqualWeightHorizontally"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
 
-            <TextView
-                style="@style/FormField"
-                android:text="@string/date_sick" />
+            <LinearLayout
+                style="@style/EqualWeightHorizontally"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/date_sick"
-                style="@style/FormField"
-                android:focusable="false" />
+                <android.support.design.widget.TextInputLayout style="@style/FormField">
+
+                    <EditText
+                        android:layout_gravity="center"
+                        android:id="@+id/date_sick"
+                        style="@style/Date"
+                        android:hint="@string/date_sick" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_all_unk"
+                style="@style/EqualWeightHorizontally"
+                android:layout_gravity="center"
+                android:text="@string/all_unk" />
         </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_all_unk"
-            style="@style/EqualWeightHorizontally"
-            android:layout_gravity="center"
-            android:text="@string/all_unk" />
     </LinearLayout>
 
 

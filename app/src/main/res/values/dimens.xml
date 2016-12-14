@@ -1,3 +1,6 @@
 <resources>
-<dimen name="screen_border_distance">16dp</dimen>
+    <dimen name="screen_border_distance">16dp</dimen>
+    <dimen name="form_field_padding">8dp</dimen>
+    <dimen name="risk_score_bar_height">40dp</dimen>
+    <dimen name="text_size">15sp</dimen>
 </resources>

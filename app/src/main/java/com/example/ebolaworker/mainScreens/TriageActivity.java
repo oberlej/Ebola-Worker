@@ -1,5 +1,7 @@
 package com.example.ebolaworker.mainScreens;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -12,7 +14,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.ebolaworker.R;
@@ -45,7 +51,9 @@ public class TriageActivity extends AppCompatActivity {
 
     private SymptomsFragment mSymptomFragment;
 
-    public RiskScoreFragment getRiskScoreFragment() { return mRiskScoreFragment; }
+    public RiskScoreFragment getRiskScoreFragment() {
+        return mRiskScoreFragment;
+    }
 
     private RiskScoreFragment mRiskScoreFragment;
 
@@ -71,7 +79,6 @@ public class TriageActivity extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-
         adapter = ((ViewPagerAdapter) viewPager.getAdapter());
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
@@ -85,23 +92,28 @@ public class TriageActivity extends AppCompatActivity {
         return true;
     }
 
+    public boolean savePatient() {
+        if (!mPatientFragment.validatePatient()) {
+            mSymptomFragment.validateSymptoms();
+            if (viewPager.getCurrentItem() != 0) viewPager.setCurrentItem(0);
+            return false;
+        }
+        if (!mSymptomFragment.validateSymptoms()) {
+            Toast.makeText(getApplicationContext(), "Please specify all symptoms!", Toast.LENGTH_SHORT).show();
+            if (viewPager.getCurrentItem() != 1) viewPager.setCurrentItem(1);
+            return false;
+        }
+        mPatientId = mPatientFragment.savePatient(mPatientId);
+        mSymptomFragment.saveSymptoms(mPatientId);
+        return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_save:
-                if (!mPatientFragment.validatePatient()) {
-                    mSymptomFragment.validateSymptoms();
-                    if (viewPager.getCurrentItem() != 0) viewPager.setCurrentItem(0);
-                    return true;
-                }
-                if (!mSymptomFragment.validateSymptoms()) {
-                    Toast.makeText(getApplicationContext(), "Please specify all symptoms!", Toast.LENGTH_SHORT).show();
-                    if (viewPager.getCurrentItem() != 1) viewPager.setCurrentItem(1);
-                    return true;
-                }
-                mPatientId = mPatientFragment.savePatient(mPatientId);
-                mSymptomFragment.saveSymptoms(mPatientId);
+                if (!savePatient()) return true;
                 if (mIsUpdate) {
                     Toast.makeText(getApplicationContext(), "Patient " + mPatientFragment.getName() + " updated.", Toast.LENGTH_LONG).show();
                 } else {
@@ -116,8 +128,9 @@ public class TriageActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupViewPager(ViewPager viewPager) {
+    private void setupViewPager(final ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPager.setOffscreenPageLimit(2);
         mPatientFragment = new PatientFragment();
         adapter.addFragment(mPatientFragment, "Patient Information");
 
@@ -135,6 +148,36 @@ public class TriageActivity extends AppCompatActivity {
 //
 //            }
 //        });
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+                //Find the currently focused view, so we can grab the correct window token from it.
+                View view = getCurrentFocus();
+                //If no view currently has focus, create a new one, just so we can grab a window token from it
+                if (view == null) {
+                    view = new View(getApplicationContext());
+                }
+                imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                if (state == ViewPager.SCROLL_STATE_IDLE && viewPager.getCurrentItem() == 2) {
+                    if(mSymptomFragment.validateSymptoms()){
+                        mRiskScoreFragment.computeScore(mPatientId);
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Please specify all symptoms to see the infection risk score!", Toast.LENGTH_SHORT).show();
+                        if (viewPager.getCurrentItem() != 1) viewPager.setCurrentItem(1);
+                    }
+                }
+            }
+        });
         viewPager.setAdapter(adapter);
     }
 

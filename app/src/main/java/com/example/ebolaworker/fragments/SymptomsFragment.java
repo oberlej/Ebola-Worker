@@ -41,6 +41,8 @@ public class SymptomsFragment extends Fragment implements View.OnClickListener {
 
     ListView listView;
 
+    RadioButton mEbolaContactRb;
+
     EditText mDateField;
     static Calendar mCalendar;
     DatePickerFragment dateFragment;
@@ -112,6 +114,8 @@ public class SymptomsFragment extends Fragment implements View.OnClickListener {
 
         mButtonSetAllUnknown = (Button) v.findViewById(R.id.btn_all_unk);
         mButtonSetAllUnknown.setOnClickListener(this);
+
+        mEbolaContactRb = (RadioButton) v.findViewById(R.id.symptom_contact_yes);
 
         mCalendar = Calendar.getInstance();
         getSymptoms(v);
@@ -213,6 +217,10 @@ public class SymptomsFragment extends Fragment implements View.OnClickListener {
         }
 
         return allSet;
+    }
+
+    public boolean hadEbolaContact(){
+        return mEbolaContactRb.isChecked();
     }
 
     public List<Symptom> getSymptoms(){

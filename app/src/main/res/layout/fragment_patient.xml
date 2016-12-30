@@ -177,17 +177,18 @@
                     </android.support.design.widget.TextInputLayout>
                 </LinearLayout>
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="12dp"
-                    android:layout_weight="1">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <EditText
                         android:id="@+id/age"
                         style="@style/FormField"
                         android:layout_width="70dp"
-                        android:layout_centerInParent="true"
+                        android:layout_gravity="center"
                         android:background="@drawable/age_rectangle"
                         android:digits="0123456789"
                         android:gravity="center"
@@ -197,11 +198,10 @@
 
                     <TextView
                         style="@style/FormField"
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@id/age"
-                        android:paddingLeft="10dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
                         android:text="@string/years" />
-                </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
 
             <!--Permanent Residence-->

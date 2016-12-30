@@ -40,6 +40,8 @@ public class RiskScoreFragment extends Fragment implements View.OnClickListener 
     private LinearLayout mWrapperDeath;
     private TextView mDeathPlaceholder;
 
+    private SymptomsFragment mSymptomsFrag;
+
     static final String DATE_FORMAT = "dd/MM/yyyy";
     SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
     private DatabaseHelper mDBHelper;
@@ -95,6 +97,8 @@ public class RiskScoreFragment extends Fragment implements View.OnClickListener 
         Paint paint = new Paint();
         paint.setTextSize(getResources().getDimension(R.dimen.text_size));
         mLabelSize = paint.measureText(mLabel);
+
+        mSymptomsFrag = ((TriageActivity)getActivity()).getSymptomFragment();
     }
 
     public void computeScore(long patientId) {
@@ -120,10 +124,12 @@ public class RiskScoreFragment extends Fragment implements View.OnClickListener 
 //
 //        }
         double logit = -3.326909;
-        for (Symptom s : ((TriageActivity) getActivity()).getSymptomFragment().getSymptoms()) {
+        for (Symptom s : mSymptomsFrag.getSymptoms()) {
             if (!(s.is_present == DatabaseHelper.SymptomPresent.YES.ordinal())) continue;
             logit += getCoef(s.label);
         }
+        logit += mSymptomsFrag.hadEbolaContact() ? 2.967292 : 0;
+
         double prob = Math.exp(logit) / (1 + Math.exp(logit)) * 100;
 
         //-mLabelSize/2 so that the Label (X) is centered on the percentage. Otherwise it starts at the percentage

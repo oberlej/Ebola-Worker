@@ -3,25 +3,38 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        style="@style/FormField"
-        android:text="Last Name" />
+    <include
+        layout="@layout/toolbar_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-    <EditText
-        android:id="@+id/search_last_name"
-        style="@style/FormField" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/screen_border_distance">
 
-    <TextView
-        style="@style/FormField"
-        android:text="First Name" />
+        <android.support.design.widget.TextInputLayout style="@style/FormField">
 
-    <EditText
-        android:id="@+id/search_first_name"
-        style="@style/FormField" />
+            <EditText
+                android:id="@+id/search_last_name"
+                style="@style/FormField"
+                android:hint="@string/last_name" />
+        </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/search_btn"
-        style="@style/FormButton"
-        android:onClick="search"
-        android:text="@string/show_all_patients"/>
+        <android.support.design.widget.TextInputLayout style="@style/FormField">
+
+            <EditText
+                android:id="@+id/search_first_name"
+                style="@style/FormField"
+                android:hint="@string/first_name" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/search_btn"
+            style="@style/FormButton"
+            android:onClick="search"
+            android:layout_gravity="center"
+            android:text="@string/show_all_patients" />
+    </LinearLayout>
 </LinearLayout>

@@ -1,16 +1,20 @@
 package com.example.ebolaworker.fragments;
 
+import android.Manifest;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.provider.MediaStore;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -42,6 +46,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class PatientFragment extends Fragment implements View.OnClickListener {
 
+    private static final int MY_PERMISSIONS_REQUEST_CAMERA = 14123;
     DatabaseHelper mDBHelper;
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
@@ -52,7 +57,7 @@ public class PatientFragment extends Fragment implements View.OnClickListener {
     EditText mOCI;
     EditText mETCI;
 
-
+    EditText mTriageDate;
     EditText mLastName;
     EditText mFirstName;
     EditText mBirthDate;
@@ -99,6 +104,7 @@ public class PatientFragment extends Fragment implements View.OnClickListener {
             initFields();
             updateFields();
         }
+        requestFocus(mLastName);
         return mView;
     }
 
@@ -189,7 +195,6 @@ public class PatientFragment extends Fragment implements View.OnClickListener {
 
         mImageView = (ImageView) mView.findViewById(R.id.patient_image);
         mImageView.setOnClickListener(this);
-//        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         mOCI = (EditText) mView.findViewById(R.id.outbreak_id);
         mETCI = (EditText) mView.findViewById(R.id.app_id);
         String id = "";
@@ -198,6 +203,8 @@ public class PatientFragment extends Fragment implements View.OnClickListener {
             id += r.nextInt(10);
         }
         mCalendar = Calendar.getInstance();
+        mTriageDate = (EditText) mView.findViewById(R.id.patient_triage_date);
+        mTriageDate.setText(dateFormat.format(mCalendar.getTime()));
         mBirthDate = (EditText) mView.findViewById(R.id.birth_date);
         mETCI.setText(id);
 //        set default date
@@ -289,7 +296,7 @@ public class PatientFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void afterTextChanged(Editable s) {
-                validateEditText(mFirstName,(TextInputLayout)mView.findViewById(R.id.patient_first_name_layout));
+                validateEditText(mFirstName, (TextInputLayout) mView.findViewById(R.id.patient_first_name_layout));
             }
         });
         mLastName.addTextChangedListener(new TextWatcher() {
@@ -305,13 +312,22 @@ public class PatientFragment extends Fragment implements View.OnClickListener {
 
             @Override
             public void afterTextChanged(Editable s) {
-                validateEditText(mLastName,(TextInputLayout)mView.findViewById(R.id.patient_last_name_layout));
+                validateEditText(mLastName, (TextInputLayout) mView.findViewById(R.id.patient_last_name_layout));
             }
         });
 
     }
 
     public void dispatchTakePictureIntent() {
+        //Check for camera permission
+        if (ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
+        } else {
+            takePicture();
+        }
+    }
+
+    private void takePicture() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
@@ -392,6 +408,7 @@ public class PatientFragment extends Fragment implements View.OnClickListener {
             mCalendar.set(Calendar.DAY_OF_MONTH, day);
             ((TriageActivity) getActivity()).getPatientFragment().updateDateButtonText();
         }
+
     }
 
     /**
@@ -428,7 +445,10 @@ public class PatientFragment extends Fragment implements View.OnClickListener {
     }
 
     public void barcodeScan() {
-        Intent intent = new IntentIntegrator(getActivity()).createScanIntent();
+        IntentIntegrator scanner = new IntentIntegrator(getActivity());
+        scanner.setOrientationLocked(false);
+
+        Intent intent = scanner.createScanIntent();
         intent.setAction(Intents.Scan.ACTION);
         intent.putExtra("RESULT_DISPLAY_DURATION_MS", 0L);
         startActivityForResult(intent, IntentIntegrator.REQUEST_CODE);
@@ -521,6 +541,19 @@ public class PatientFragment extends Fragment implements View.OnClickListener {
             case R.id.cb_healthcare_worker:
                 onCbOccupation(v);
                 break;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_CAMERA: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    takePicture();
+                }
+                return;
+            }
         }
     }
 }

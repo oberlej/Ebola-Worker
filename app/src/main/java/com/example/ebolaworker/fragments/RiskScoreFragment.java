@@ -138,7 +138,6 @@ public class RiskScoreFragment extends Fragment implements View.OnClickListener 
         mEbolaScore.setText(String.valueOf(Math.round(prob * 100d) / 100d) + "%");
     }
 
-
     public double getCoef(String symp) {
         switch (symp) {
             case "Fever":
@@ -170,7 +169,7 @@ public class RiskScoreFragment extends Fragment implements View.OnClickListener 
             case "Hiccups":
                 break;
             case "Unexplained bleeding":
-                break;
+                return 1.07405;
         }
         return 0;
     }

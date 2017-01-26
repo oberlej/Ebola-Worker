@@ -27,7 +27,8 @@
             android:name="com.example.ebolaworker.mainScreens.TriageActivity"
             android:parentActivityName="com.example.ebolaworker.mainScreens.MainActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden"
+            tools:replace="screenOrientation"/>
 
         <activity
             android:name="com.example.ebolaworker.mainScreens.SearchActivity"
@@ -38,7 +39,11 @@
         <activity
             android:name="com.example.ebolaworker.mainScreens.PatientListActivity"
             android:parentActivityName="com.example.ebolaworker.mainScreens.SearchActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" /><!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

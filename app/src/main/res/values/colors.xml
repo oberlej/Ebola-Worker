@@ -11,4 +11,6 @@
     <color name="colorHighRisk">#F44336</color>
     <color name="actionBarText">#FFFFFF</color>
     <color name="white">#FFFFFF</color>
+    <color name="colorVeryLowRisk">#006400</color>
+    <color name="colorVeryHighRisk">#8B0000</color>
 </resources>

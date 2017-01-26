@@ -37,8 +37,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String LAST_NAME = "last_name";
 
     public enum Genders {MALE, FEMALE}
-
-    ;
+    public static final String TRIAGE_DATE = "triage_date";
     public static final String GENDER = "gender";
     public static final String BIRTH_DATE = "birth_date";
 
@@ -97,6 +96,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Patient
     static final String CREATE_TABLE_PATIENT = "CREATE TABLE " + TABLE_PATIENT + "("
             + ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + TRIAGE_DATE + " TEXT NOT NULL,"
             + FIRST_NAME + " TEXT NOT NULL,"
             + LAST_NAME + " TEXT NOT NULL,"
             + GENDER + " INTEGER,"
@@ -203,20 +203,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     // --- patient methods --- //
-    public Cursor fetchPatientsByCriterias(String firstName, String lastName) {
+
+    public Cursor fetchPatientsByCriterias(String firstName, String lastName, String triageDate,String id) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String selectQuery = "SELECT * FROM " + TABLE_PATIENT + " WHERE ";
-        if (firstName.isEmpty()) {
-            selectQuery += LAST_NAME + " = '" + lastName + "';";
-        } else if (lastName.isEmpty()) {
-            selectQuery += FIRST_NAME + " = '" + firstName + "';";
-        } else {
-            selectQuery += FIRST_NAME + " = '" + firstName + "' AND " + LAST_NAME + " = '" + lastName + "';";
-        }
-        Log.e(LOG, selectQuery);
-        Cursor c = db.rawQuery(selectQuery, null);
+        Cursor c = db.query(true,TABLE_PATIENT,null,FIRST_NAME+" LIKE ? AND "+LAST_NAME+" LIKE ?",new String[]{"%"+firstName+"%","%"+lastName+"%"},null,null,null,"25");
         return c;
     }
+
 
     public BasicPatient getBasicPatientInformationByPatientId(long patientId) {
         Cursor c = fetchByIdFromTable(patientId,TABLE_PATIENT);

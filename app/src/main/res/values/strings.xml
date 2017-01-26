@@ -3,8 +3,7 @@
     <!-- String values to pass data in intents -->
     <string name="PATIENT_ID">patient_id</string>
 
-    <item type="id" name="PATIENT_ID_TAG" />
-
+    <item name="PATIENT_ID_TAG" type="id" />
 
 
     <!-- Example General settings -->
@@ -76,7 +75,7 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-    <string name="scan_oci_barcode">Scan OCI barcode</string>
+    <string name="scan_barcode">Scan barcode</string>
     <string name="oci">OCI:</string>
     <string name="etci">ETCI:</string>
     <string name="personal_information">Personal Information</string>
@@ -124,4 +123,9 @@
     <string name="all_unk">Set Rest Unknown</string>
     <string name="risk_death_input_results">Please enter the medical ebola test results to see the severity score</string>
     <string name="risk_death_no_ebola">Ebola is confirmed negative.</string>
+    <string name="triage_date">Triage Date</string>
+    <string name="very_low_risk">Very Low Risk</string>
+    <string name="very_high_risk">Very High Risk</string>
+    <string name="barcode_id">Barcode ID</string>
+    <string name="patient_id">Patient ID</string>
 </resources>

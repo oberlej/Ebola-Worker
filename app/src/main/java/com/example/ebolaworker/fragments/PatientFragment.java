@@ -40,6 +40,7 @@ import com.google.zxing.integration.android.IntentResult;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Random;
 
 import static android.app.Activity.RESULT_OK;
@@ -520,6 +521,10 @@ public class PatientFragment extends Fragment implements View.OnClickListener {
 
     public String getName() {
         return mLastName.getText().toString() + " " + mFirstName.getText().toString();
+    }
+
+    public Date getTriageDate() throws ParseException {
+        return dateFormat.parse(mTriageDate.getText().toString());
     }
 
     @Override

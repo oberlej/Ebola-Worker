@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <integer name="weightVeryLow">4</integer>
-    <integer name="weightLow">3</integer>
-    <integer name="weightMed">3</integer>
-    <integer name="weightHigh">4</integer>
-    <integer name="weightVeryHigh">7</integer>
+    <integer name="weightVeryLow">1</integer>
+    <integer name="weightLow">1</integer>
+    <integer name="weightMed">1</integer>
+    <integer name="weightHigh">1</integer>
+    <integer name="weightVeryHigh">1</integer>
 </resources>

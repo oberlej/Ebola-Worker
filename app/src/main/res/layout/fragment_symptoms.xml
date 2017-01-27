@@ -26,7 +26,7 @@
             android:textColor="@android:color/black" />
 
         <RadioGroup
-            android:id="@+id/symptom_row_rg"
+            android:id="@+id/symptom_contact_rg"
             style="@style/RadioGroup"
             android:layout_marginTop="10dp">
 

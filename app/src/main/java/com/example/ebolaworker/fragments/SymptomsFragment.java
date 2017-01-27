@@ -30,6 +30,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,7 +44,7 @@ public class SymptomsFragment extends Fragment implements View.OnClickListener {
 
     RadioButton mEbolaContactRb;
 
-    EditText mDateField;
+    EditText mDateSick;
     static Calendar mCalendar;
     DatePickerFragment dateFragment;
     static final String DATE_FORMAT = "dd/MM/yyyy";
@@ -109,8 +110,8 @@ public class SymptomsFragment extends Fragment implements View.OnClickListener {
         footer.setOrientation(LinearLayout.HORIZONTAL);
 
 
-        mDateField = (EditText) v.findViewById(R.id.date_sick);
-        mDateField.setOnClickListener(this);
+        mDateSick = (EditText) v.findViewById(R.id.date_sick);
+        mDateSick.setOnClickListener(this);
 
         mButtonSetAllUnknown = (Button) v.findViewById(R.id.btn_all_unk);
         mButtonSetAllUnknown.setOnClickListener(this);
@@ -120,8 +121,6 @@ public class SymptomsFragment extends Fragment implements View.OnClickListener {
         mCalendar = Calendar.getInstance();
         getSymptoms(v);
         updateDateButtonText();
-
-
 
 
         LinearLayout ll = (LinearLayout) v.findViewById(R.id.symptoms_footer_wrapper);
@@ -140,7 +139,7 @@ public class SymptomsFragment extends Fragment implements View.OnClickListener {
     public void updateDateButtonText() {
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
         String dateForButton = dateFormat.format(mCalendar.getTime());
-        mDateField.setText(dateForButton);
+        mDateSick.setText(dateForButton);
     }
 
     public void getSymptoms(View v) {
@@ -153,12 +152,12 @@ public class SymptomsFragment extends Fragment implements View.OnClickListener {
             Cursor c = mDBHelper.fetchByIdFromTable(patientId, DatabaseHelper.TABLE_PATIENT);
             if (c != null && c.moveToFirst()) {
                 String dateForButton = c.getString(c.getColumnIndexOrThrow(DatabaseHelper.DATE_ILLNESS));
-                mDateField.setText(dateForButton);
+                mDateSick.setText(dateForButton);
                 try {
                     mCalendar.setTime(dateFormat.parse(dateForButton));
                 } catch (ParseException e) {
                 }
-            }else{
+            } else {
             }
         } else {
             list = new ArrayList<Symptom>();
@@ -215,20 +214,26 @@ public class SymptomsFragment extends Fragment implements View.OnClickListener {
                 allSet = false;
             }
         }
+        //check if ebola contact is set
+        allSet &= ((RadioGroup) getView().findViewById(R.id.symptom_contact_rg)).getCheckedRadioButtonId() != -1;
 
         return allSet;
     }
 
-    public boolean hadEbolaContact(){
+    public boolean hadEbolaContact() {
         return mEbolaContactRb.isChecked();
     }
 
-    public List<Symptom> getSymptoms(){
-        return ((SymptomArrayAdapter) ((HeaderViewListAdapter)listView.getAdapter()).getWrappedAdapter()).getData();
+    public Date getFirstSympDate() throws ParseException {
+        return dateFormat.parse(mDateSick.getText().toString());
+    }
+
+    public List<Symptom> getSymptoms() {
+        return ((SymptomArrayAdapter) ((HeaderViewListAdapter) listView.getAdapter()).getWrappedAdapter()).getData();
     }
 
     public void saveSymptoms(long patientId) {
-        for (Symptom s : ((SymptomArrayAdapter) ((HeaderViewListAdapter)listView.getAdapter()).getWrappedAdapter()).getData()) {
+        for (Symptom s : ((SymptomArrayAdapter) ((HeaderViewListAdapter) listView.getAdapter()).getWrappedAdapter()).getData()) {
             ContentValues values = new ContentValues();
             values.put(DatabaseHelper.SYMPTOM_LABEL, s.label);
             values.put(DatabaseHelper.IS_PRESENT, s.is_present);

@@ -19,7 +19,9 @@ import com.example.ebolaworker.model.Symptom;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class RiskScoreFragment extends Fragment implements View.OnClickListener {
 
@@ -41,6 +43,7 @@ public class RiskScoreFragment extends Fragment implements View.OnClickListener 
     private TextView mDeathPlaceholder;
 
     private SymptomsFragment mSymptomsFrag;
+    private PatientFragment mPatientFrag;
 
     static final String DATE_FORMAT = "dd/MM/yyyy";
     SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
@@ -98,31 +101,12 @@ public class RiskScoreFragment extends Fragment implements View.OnClickListener 
         paint.setTextSize(getResources().getDimension(R.dimen.text_size));
         mLabelSize = paint.measureText(mLabel);
 
-        mSymptomsFrag = ((TriageActivity)getActivity()).getSymptomFragment();
+        mSymptomsFrag = ((TriageActivity) getActivity()).getSymptomFragment();
+        mPatientFrag = ((TriageActivity) getActivity()).getPatientFragment();
+
     }
 
     public void computeScore(long patientId) {
-
-//        if (patientId != -1) {
-//            List<Symptom> symptoms = mDBHelper.getAllSymptomsByPatientId(patientId);
-//            Cursor patient = mDBHelper.fetchByIdFromTable(patientId, DatabaseHelper.TABLE_PATIENT);
-//            int score = 0;
-//            if (patient != null && patient.moveToFirst() && !symptoms.isEmpty()) {
-//                String date = patient.getString(patient.getColumnIndexOrThrow(DatabaseHelper.DATE_ILLNESS));
-//                try {
-//                    Calendar dateIllness = Calendar.getInstance();
-//                    dateIllness.setTime(dateFormat.parse(date));
-//                    Calendar today = Calendar.getInstance();
-//                    int diff = today.compareTo(dateIllness);
-//                    if (diff > 4) {
-//                        score += 3;
-//                    }
-//                } catch (ParseException e) {
-//                }
-//
-//            }
-//
-//        }
         double logit = -3.326909;
         for (Symptom s : mSymptomsFrag.getSymptoms()) {
             if (!(s.is_present == DatabaseHelper.SymptomPresent.YES.ordinal())) continue;
@@ -130,10 +114,21 @@ public class RiskScoreFragment extends Fragment implements View.OnClickListener 
         }
         logit += mSymptomsFrag.hadEbolaContact() ? 2.967292 : 0;
 
+        try {
+            Date triageDate = mPatientFrag.getTriageDate();
+            Date firstSympDate = mSymptomsFrag.getFirstSympDate();
+            long diff = triageDate.getTime() - firstSympDate.getTime();
+            if (diff > 0) {
+                int days = ((Long) TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)).intValue();
+                logit += days * 1.315461;
+            }
+        } catch (ParseException e) {
+        }
+
         double prob = Math.exp(logit) / (1 + Math.exp(logit)) * 100;
 
         //-mLabelSize/2 so that the Label (X) is centered on the percentage. Otherwise it starts at the percentage
-        mEbolaScoreLabel.setPadding((int)(mEbolaScoreLabel.getWidth()*(prob/100) - mLabelSize/2),0,0,0);
+        mEbolaScoreLabel.setPadding((int) (mEbolaScoreLabel.getWidth() * (prob / 100) - mLabelSize / 2), 0, 0, 0);
         mEbolaScoreLabel.setText(mLabel);
         mEbolaScore.setText(String.valueOf(Math.round(prob * 100d) / 100d) + "%");
     }
@@ -178,8 +173,11 @@ public class RiskScoreFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.risk_ebola_yes_rb:
-                mDeathPlaceholder.setVisibility(View.GONE);
-                mWrapperDeath.setVisibility(View.VISIBLE);
+//                mDeathPlaceholder.setVisibility(View.GONE);
+//                mWrapperDeath.setVisibility(View.VISIBLE);
+                mDeathPlaceholder.setVisibility(View.VISIBLE);
+                mWrapperDeath.setVisibility(View.GONE);
+                mDeathPlaceholder.setText("This feature is still under development. We will try to update the app as soon as possible.");
                 break;
             case R.id.risk_ebola_no_rb:
                 mDeathPlaceholder.setVisibility(View.VISIBLE);
